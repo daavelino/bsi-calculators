@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+<meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+
+table {border-spacing:5px;}
+
+td {cursor:pointer;padding:15px;}
+
+.x_label {
+  float: right;
+  font-weight: bold;  
+}
+
+.x_axis{
+  float: center;
+  border-top: 1px solid;
+}
+
+.x_axis_selected {
+ background: lightGrey;
+}
+
+.y_axis {
+  float: right;
+  padding: 20px;
+  border-right: 1px solid;
+}
+
+.y_axis_selected {
+ background: lightGrey;
+}
+
+.y_label {
+  float: left;
+  font-weight: bold;  
+}
+
+.td_unselected {
+  cursor: pointer;
+  padding: 15px;
+  background: LightGrey;
+}
+
+.td_not_allowed {
+  cursor: not-allowed;
+  padding: 15px;
+  background: LightGrey;
+}
+
+.td_selected_very_high {
+  color: white;
+  background: red;
+}
+.td_selected_high {
+  background: yellow;
+}
+.td_selected_medium {
+  background: YellowGreen;
+}
+
+.td_selected_low {
+  color: white;
+  background: green;
+}
+</style>
+
+<script>
+  // Descriptions according to BSI 200-3:
+  const frequency_description = {
+      "rarely":"According to present knowledge, the event could occur every 5 years <b>at the most</b>.",
+      "medium":"The event occurs <b>once every <b>5 years to once a year</b>.",
+      "often":"The event occurs <b>once a year to once a month</b>.",
+      "very often":"The event occurs <b>several times a month</b>."
+    };
+
+  const damage_description = {
+      "negligible":"The effects of damage are low and can be negleted.",
+      "limited":"The effects of the damage are <b>limited and managable</b>.",
+      "significant":"The effects of damage <b>can be significant</b>.",
+      "life-threatening":"The effects of the damage <b>can reach a catastrophic level</b> that threatens the existence of the organization."
+    };
+
+   const risk_description = {
+      "low":"The security safeguards already implemented or at least envisaged in the security concept provide adequate protection. In practice, it is common to accept low risks and to still monitor the treat.",
+      "medium":"The security safeguards already implemented or at least envisaged in the security concept might not be sufficient.",
+      "high":"The security safeguards already implemented or at least envisaged in the security concept <b>do not provide</b> adequate protection against the respective threat.",
+      "very high":"The security safeguards already implemented or at least envisaged in the security concept <b>do not provide</b> adequate protection against the respective threat. <b>In practice, very high risks are rarely accepted.</b>"
+    };
+
+
+  // returns the value's coordinates on the table as a [x, y] pair:
+  function get_coordinates(e) {
+    return e.id.split("_");
+  }
+
+  function mark_when_click(e,name) {
+    // updating the selection control:
+    if (selection_control.value == "None") {
+      selection_control.value = e.id;
+    } else {
+      if (e.id != selection_control.value) {
+        return;
+      }
+      selection_control.value = "None";
+    }
+
+    // the x and y axis positions:
+    tmp = get_coordinates(e);
+    x_coordinate = tmp[0];
+    y_coordinate = tmp[1];
+    x_element = document.getElementById(x_coordinate);
+    y_element = document.getElementById(y_coordinate);
+
+    frequency = x_element.textContent;
+    damage = y_element.textContent;
+
+    actual_class = e.className;
+    if (actual_class == "td_unselected") { 
+      selection_control.value = e.id;
+
+      new_class = "td_selected_"+name;
+      e.className = new_class
+      // coloring the axis using the risk colors:
+      if (x_element.className.includes(new_class)) {
+        x_element.className = x_element.className.replace(new_class,"");
+      } else {
+        x_element.className = x_element.className + " " + new_class;
+      }
+      if (y_element.className.includes(new_class)) {
+        y_element.className = y_element.className.replace(new_class,"");
+      } else {
+        y_element.className = y_element.className + " " + new_class;
+      }
+   
+      // producing the output text: 
+      risk_name = e.textContent;
+      tmp = document.getElementById("risk_value");
+      tmp.innerHTML = "Risk value: " + risk_name; 
+      tmp = document.getElementById("risk_description");
+      tmp.innerHTML = risk_description[risk_name]; 
+
+      tmp = document.getElementById("chosen_frequency");
+      tmp.innerHTML = frequency + "<small>(frequency)</small>:"; 
+      tmp = document.getElementById("frequency_description");
+      tmp.innerHTML = frequency_description[frequency];
+
+      tmp = document.getElementById("chosen_damage");
+      tmp.innerHTML = damage +  "<small>(damage)</small>:" 
+      tmp = document.getElementById("damage_description");
+      tmp.innerHTML = damage_description[damage];
+    } else {
+      new_class = "td_selected_"+name;
+      e.className = "td_unselected";
+
+      x_element.className = x_element.className.replace(new_class,"");
+      y_element.className = y_element.className.replace(new_class,"");
+
+      // removing the description table:
+      tmp = document.getElementById("risk_value");
+      tmp.innerHTML = ""; 
+      tmp = document.getElementById("risk_description");
+      tmp.innerHTML = ""; 
+      tmp = document.getElementById("chosen_frequency");
+      tmp.innerHTML = ""; 
+      tmp = document.getElementById("frequency_description");
+      tmp.innerHTML = ""; 
+      tmp = document.getElementById("chosen_damage");
+      tmp.innerHTML = ""; 
+      tmp = document.getElementById("damage_description");
+      tmp.innerHTML = ""; 
+    }
+  }
+
+  function highlight_axis(e,name) {
+    // Do not highlight (hover) when an item has been selected:
+    selection_control = document.getElementById("selected");
+    if (selection_control.value != "None") {
+      if (e.id != selection_control.value) {
+        e.className = "td_not_allowed";
+        return;
+        } 
+    } else {
+      if (e.id != selection_control.value) {
+        e.className = "td_unselected";
+      } 
+    } 
+
+    // getting axis coordinates based on their ids:
+    tmp = get_coordinates(e);
+    x_coordinate = tmp[0];
+    y_coordinate = tmp[1];
+    x_element = document.getElementById(x_coordinate);
+    y_element = document.getElementById(y_coordinate);
+
+    // highlighting axis properly:
+    target = "x_axis_selected";
+    if (x_element.className.includes(target)) {
+        x_element.className = x_element.className.replace(target,"");
+    } else {
+        x_element.className = x_element.className + " " + target;
+    }
+    target = "y_axis_selected";
+    if (y_element.className.includes("y_axis_selected")) {
+        y_element.className = y_element.className.replace(target,"");
+    } else {
+        y_element.className = y_element.className + " " + target;
+    }
+ }
+  
+</script>
+</head>
+<body>
+  <h1>BSI's Risk Calculator</h1>
+  <table id="risk_table">
+    <tr>
+      <td class="y_label">Potential damage</td>
+    </tr>
+    <tr>
+      <td class="y_axis" id="y4">life-threatening</td>
+      <td class="td_unselected" id="x1_y4" onclick=mark_when_click(this,"medium") onmouseover=highlight_axis(this,"medium") onmouseout=highlight_axis(this,"medium")>medium</td>
+      <td class="td_unselected" id="x2_y4" onclick=mark_when_click(this,"high") onmouseover=highlight_axis(this,"high") onmouseout=highlight_axis(this,"high")>high</td>
+      <td class="td_unselected" id="x3_y4" onclick=mark_when_click(this,"very_high") onmouseover=highlight_axis(this,"very_high") onmouseout=highlight_axis(this,"very_high")>very high</td>
+      <td class="td_unselected" id="x4_y4" onclick=mark_when_click(this,"very_high") onmouseover=highlight_axis(this,"very_high") onmouseout=highlight_axis(this,"very_high")>very high</td>
+    </tr>
+    <tr>
+      <td class="y_axis" id="y3">significant</td>
+      <td class="td_unselected" id="x1_y3" onclick=mark_when_click(this,"medium") onmouseover=highlight_axis(this,"medium") onmouseout=highlight_axis(this,"medium")>medium</td>
+      <td class="td_unselected" id="x2_y3" onclick=mark_when_click(this,"medium") onmouseover=highlight_axis(this,"medium") onmouseout=highlight_axis(this,"medium")>medium</td>
+      <td class="td_unselected" id="x3_y3" onclick=mark_when_click(this,"high") onmouseover=highlight_axis(this,"high") onmouseout=highlight_axis(this,"high")>high</td>
+      <td class="td_unselected" id="x4_y3" onclick=mark_when_click(this,"very_high") onmouseover=highlight_axis(this,"very_high") onmouseout=highlight_axis(this,"very_high")>very high</td>
+    </tr>
+    <tr>
+      <td class="y_axis" id="y2">limited</td>
+      <td class="td_unselected" id="x1_y2" onclick=mark_when_click(this,"low") onmouseover=highlight_axis(this,name) onmouseout=highlight_axis(this,name)>low</td>
+      <td class="td_unselected" id="x2_y2" onclick=mark_when_click(this,"low") onmouseover=highlight_axis(this,"low") onmouseout=highlight_axis(this,"low")>low</td>
+      <td class="td_unselected" id="x3_y2" onclick=mark_when_click(this,"medium") onmouseover=highlight_axis(this,"medium") onmouseout=highlight_axis(this,"medium")>medium</td>
+      <td class="td_unselected" id="x4_y2" onclick=mark_when_click(this,"high") onmouseover=highlight_axis(this,"high") onmouseout=highlight_axis(this,"high")>high</td>
+    </tr>
+    <tr>
+      <td class="y_axis" id="y1">negligible</td>
+      <td class="td_unselected" id="x1_y1" onclick=mark_when_click(this,"low") onmouseover=highlight_axis(this,"low") onmouseout=highlight_axis(this,"low")>low</td>
+      <td class="td_unselected" id="x2_y1" onclick=mark_when_click(this,"low") onmouseover=highlight_axis(this,"low") onmouseout=highlight_axis(this,"low")>low</td>
+      <td class="td_unselected" id="x3_y1" onclick=mark_when_click(this,"low") onmouseover=highlight_axis(this,"low") onmouseout=highlight_axis(this,"low")>low</td>
+      <td class="td_unselected" id="x4_y1" onclick=mark_when_click(this,"low") onmouseover=highlight_axis(this,"low") onmouseout=highlight_axis(this,"low")>low</td>
+    </tr>
+    <th>
+      <td class="x_axis" id="x1">rarely</td>
+      <td class="x_axis" id="x2">medium</td>
+      <td class="x_axis" id="x3">often</td>
+      <td class="x_axis" id="x4">very often</td>
+      <td class="x_label">Frequency of occurency</td>
+    </th>
+  <input type="hidden" id="selected" value="None"></p>
+  </table>
+
+  <br>
+
+  <table id="bsi_description" class="table">
+    <tr>
+      <th id="risk_value"></th>
+      <td id="risk_description"></td>
+    </tr>
+    <tr>
+      <th id="chosen_damage"></th>
+      <td id="damage_description"></td>
+    </tr>
+    <tr>
+      <th id="chosen_frequency"></th>
+      <td id="frequency_description"></td>
+    </tr>
+    <tr>
+    </tr>
+  </table>
+
+  <p>
+    <small>
+      <strong>*</strong>Please check the <a href="https://www.bsi.bund.de/DE/Themen/Unternehmen-und-Organisationen/Standards-und-Zertifizierung/IT-Grundschutz/BSI-Standards/BSI-Standard-200-3-Risikomanagement/bsi-standard-200-3-risikomanagement_node.html">BSI-Standard 200-3</a> for further information.
+    </small>
+  </p>
+
+</body>
+</html>
