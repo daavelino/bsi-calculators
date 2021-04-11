@@ -4,9 +4,23 @@
 <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
 
-table {border-spacing:5px;}
+table {
+border-spacing:5px;
+}
 
-td {cursor:pointer;padding:15px;}
+.description_table {
+  cursor: default;
+  text-align: left;
+  vertical-align: center;
+  width: 60%;
+  border-spacing:2px;
+  border-collapse: collapse;
+}
+
+td {
+  cursor:default;
+  padding:15px;
+}
 
 .x_label {
   float: right;
@@ -29,7 +43,7 @@ td {cursor:pointer;padding:15px;}
 }
 
 .y_axis_selected {
- background: lightGrey;
+  background: lightGrey;
 }
 
 .y_label {
@@ -64,6 +78,17 @@ td {cursor:pointer;padding:15px;}
   color: white;
   background: green;
 }
+
+.text_small {
+  font-size: small;
+}
+
+.text_xsmall {
+  font-size: x-small;
+}
+
+.text_large {
+  font-size: x-large;
 </style>
 
 <script>
@@ -134,22 +159,23 @@ td {cursor:pointer;padding:15px;}
         y_element.className = y_element.className + " " + new_class;
       }
    
-      // producing the output text: 
+      // producing the description table: 
       risk_name = e.textContent;
       tmp = document.getElementById("risk_value");
-      tmp.innerHTML = "Risk value: " + risk_name; 
+      tmp.className = new_class;
+      tmp.innerHTML = "<span class='text_xsmall'>Risk:<br></span>" + risk_name; 
       tmp = document.getElementById("risk_description");
-      tmp.innerHTML = risk_description[risk_name]; 
+      tmp.innerHTML = "<span class='text_small'>" + risk_description[risk_name] + "</span>"; 
 
       tmp = document.getElementById("chosen_frequency");
-      tmp.innerHTML = frequency + "<small>(frequency)</small>:"; 
+      tmp.innerHTML = "<span class='text_xsmall'>frequency:<br></span>" + frequency; 
       tmp = document.getElementById("frequency_description");
-      tmp.innerHTML = frequency_description[frequency];
+      tmp.innerHTML = "<span class='text_small'>" + frequency_description[frequency] + "</span>";
 
       tmp = document.getElementById("chosen_damage");
-      tmp.innerHTML = damage +  "<small>(damage)</small>:" 
+      tmp.innerHTML = "<span class='text_xsmall'>damage:<br></span>" + damage;
       tmp = document.getElementById("damage_description");
-      tmp.innerHTML = damage_description[damage];
+      tmp.innerHTML = "<span class='text_small'>" + damage_description[damage] + "</span>";
     } else {
       new_class = "td_selected_"+name;
       e.className = "td_unselected";
@@ -159,6 +185,7 @@ td {cursor:pointer;padding:15px;}
 
       // removing the description table:
       tmp = document.getElementById("risk_value");
+      tmp.className = "";
       tmp.innerHTML = ""; 
       tmp = document.getElementById("risk_description");
       tmp.innerHTML = ""; 
@@ -213,72 +240,74 @@ td {cursor:pointer;padding:15px;}
 </head>
 <body>
   <h1>BSI's Risk Calculator</h1>
-  <table id="risk_table">
-    <tr>
-      <td class="y_label">Potential damage</td>
-    </tr>
-    <tr>
-      <td class="y_axis" id="y4">life-threatening</td>
-      <td class="td_unselected" id="x1_y4" onclick=mark_when_click(this,"medium") onmouseover=highlight_axis(this,"medium") onmouseout=highlight_axis(this,"medium")>medium</td>
-      <td class="td_unselected" id="x2_y4" onclick=mark_when_click(this,"high") onmouseover=highlight_axis(this,"high") onmouseout=highlight_axis(this,"high")>high</td>
-      <td class="td_unselected" id="x3_y4" onclick=mark_when_click(this,"very_high") onmouseover=highlight_axis(this,"very_high") onmouseout=highlight_axis(this,"very_high")>very high</td>
-      <td class="td_unselected" id="x4_y4" onclick=mark_when_click(this,"very_high") onmouseover=highlight_axis(this,"very_high") onmouseout=highlight_axis(this,"very_high")>very high</td>
-    </tr>
-    <tr>
-      <td class="y_axis" id="y3">significant</td>
-      <td class="td_unselected" id="x1_y3" onclick=mark_when_click(this,"medium") onmouseover=highlight_axis(this,"medium") onmouseout=highlight_axis(this,"medium")>medium</td>
-      <td class="td_unselected" id="x2_y3" onclick=mark_when_click(this,"medium") onmouseover=highlight_axis(this,"medium") onmouseout=highlight_axis(this,"medium")>medium</td>
-      <td class="td_unselected" id="x3_y3" onclick=mark_when_click(this,"high") onmouseover=highlight_axis(this,"high") onmouseout=highlight_axis(this,"high")>high</td>
-      <td class="td_unselected" id="x4_y3" onclick=mark_when_click(this,"very_high") onmouseover=highlight_axis(this,"very_high") onmouseout=highlight_axis(this,"very_high")>very high</td>
-    </tr>
-    <tr>
-      <td class="y_axis" id="y2">limited</td>
-      <td class="td_unselected" id="x1_y2" onclick=mark_when_click(this,"low") onmouseover=highlight_axis(this,name) onmouseout=highlight_axis(this,name)>low</td>
-      <td class="td_unselected" id="x2_y2" onclick=mark_when_click(this,"low") onmouseover=highlight_axis(this,"low") onmouseout=highlight_axis(this,"low")>low</td>
-      <td class="td_unselected" id="x3_y2" onclick=mark_when_click(this,"medium") onmouseover=highlight_axis(this,"medium") onmouseout=highlight_axis(this,"medium")>medium</td>
-      <td class="td_unselected" id="x4_y2" onclick=mark_when_click(this,"high") onmouseover=highlight_axis(this,"high") onmouseout=highlight_axis(this,"high")>high</td>
-    </tr>
-    <tr>
-      <td class="y_axis" id="y1">negligible</td>
-      <td class="td_unselected" id="x1_y1" onclick=mark_when_click(this,"low") onmouseover=highlight_axis(this,"low") onmouseout=highlight_axis(this,"low")>low</td>
-      <td class="td_unselected" id="x2_y1" onclick=mark_when_click(this,"low") onmouseover=highlight_axis(this,"low") onmouseout=highlight_axis(this,"low")>low</td>
-      <td class="td_unselected" id="x3_y1" onclick=mark_when_click(this,"low") onmouseover=highlight_axis(this,"low") onmouseout=highlight_axis(this,"low")>low</td>
-      <td class="td_unselected" id="x4_y1" onclick=mark_when_click(this,"low") onmouseover=highlight_axis(this,"low") onmouseout=highlight_axis(this,"low")>low</td>
-    </tr>
-    <th>
-      <td class="x_axis" id="x1">rarely</td>
-      <td class="x_axis" id="x2">medium</td>
-      <td class="x_axis" id="x3">often</td>
-      <td class="x_axis" id="x4">very often</td>
-      <td class="x_label">Frequency of occurency</td>
-    </th>
-  <input type="hidden" id="selected" value="None"></p>
-  </table>
+  <div>
+    <table id="risk_table">
+      <tr>
+        <td class="y_label">Potential damage</td>
+      </tr>
+      <tr>
+        <td class="y_axis" id="y4">life-threatening</td>
+        <td class="td_unselected" id="x1_y4" onclick=mark_when_click(this,"medium") onmouseover=highlight_axis(this,"medium") onmouseout=highlight_axis(this,"medium")>medium</td>
+        <td class="td_unselected" id="x2_y4" onclick=mark_when_click(this,"high") onmouseover=highlight_axis(this,"high") onmouseout=highlight_axis(this,"high")>high</td>
+        <td class="td_unselected" id="x3_y4" onclick=mark_when_click(this,"very_high") onmouseover=highlight_axis(this,"very_high") onmouseout=highlight_axis(this,"very_high")>very high</td>
+        <td class="td_unselected" id="x4_y4" onclick=mark_when_click(this,"very_high") onmouseover=highlight_axis(this,"very_high") onmouseout=highlight_axis(this,"very_high")>very high</td>
+      </tr>
+      <tr>
+        <td class="y_axis" id="y3">significant</td>
+        <td class="td_unselected" id="x1_y3" onclick=mark_when_click(this,"medium") onmouseover=highlight_axis(this,"medium") onmouseout=highlight_axis(this,"medium")>medium</td>
+        <td class="td_unselected" id="x2_y3" onclick=mark_when_click(this,"medium") onmouseover=highlight_axis(this,"medium") onmouseout=highlight_axis(this,"medium")>medium</td>
+        <td class="td_unselected" id="x3_y3" onclick=mark_when_click(this,"high") onmouseover=highlight_axis(this,"high") onmouseout=highlight_axis(this,"high")>high</td>
+        <td class="td_unselected" id="x4_y3" onclick=mark_when_click(this,"very_high") onmouseover=highlight_axis(this,"very_high") onmouseout=highlight_axis(this,"very_high")>very high</td>
+      </tr>
+      <tr>
+        <td class="y_axis" id="y2">limited</td>
+        <td class="td_unselected" id="x1_y2" onclick=mark_when_click(this,"low") onmouseover=highlight_axis(this,name) onmouseout=highlight_axis(this,name)>low</td>
+        <td class="td_unselected" id="x2_y2" onclick=mark_when_click(this,"low") onmouseover=highlight_axis(this,"low") onmouseout=highlight_axis(this,"low")>low</td>
+        <td class="td_unselected" id="x3_y2" onclick=mark_when_click(this,"medium") onmouseover=highlight_axis(this,"medium") onmouseout=highlight_axis(this,"medium")>medium</td>
+        <td class="td_unselected" id="x4_y2" onclick=mark_when_click(this,"high") onmouseover=highlight_axis(this,"high") onmouseout=highlight_axis(this,"high")>high</td>
+      </tr>
+      <tr>
+        <td class="y_axis" id="y1">negligible</td>
+        <td class="td_unselected" id="x1_y1" onclick=mark_when_click(this,"low") onmouseover=highlight_axis(this,"low") onmouseout=highlight_axis(this,"low")>low</td>
+        <td class="td_unselected" id="x2_y1" onclick=mark_when_click(this,"low") onmouseover=highlight_axis(this,"low") onmouseout=highlight_axis(this,"low")>low</td>
+        <td class="td_unselected" id="x3_y1" onclick=mark_when_click(this,"low") onmouseover=highlight_axis(this,"low") onmouseout=highlight_axis(this,"low")>low</td>
+        <td class="td_unselected" id="x4_y1" onclick=mark_when_click(this,"low") onmouseover=highlight_axis(this,"low") onmouseout=highlight_axis(this,"low")>low</td>
+      </tr>
+      <th>
+        <td class="x_axis" id="x1">rarely</td>
+        <td class="x_axis" id="x2">medium</td>
+        <td class="x_axis" id="x3">often</td>
+        <td class="x_axis" id="x4">very often</td>
+        <td class="x_label">Frequency of occurency</td>
+      </th>
+    </table>
+    <form>
+      <input type="hidden" id="selected" value="None"></p>
+    </form>
+  </div>
+ 
+  <div> 
+    <table id="bsi_description" class="description_table">
+      <tr>
+        <td id="chosen_damage" scope="row"></th>
+        <td id="damage_description"></td>
+      </tr>
+      <tr>
+        <td id="chosen_frequency" scope="row"></th>
+        <td id="frequency_description"></td>
+      </tr>
+      <tr>
+        <td id="risk_value" scope="row"></th>
+        <td id="risk_description"></td>
+      </tr>
+    </table>
+  </div>
 
-  <br>
-
-  <table id="bsi_description" class="table">
-    <tr>
-      <th id="risk_value"></th>
-      <td id="risk_description"></td>
-    </tr>
-    <tr>
-      <th id="chosen_damage"></th>
-      <td id="damage_description"></td>
-    </tr>
-    <tr>
-      <th id="chosen_frequency"></th>
-      <td id="frequency_description"></td>
-    </tr>
-    <tr>
-    </tr>
-  </table>
-
-  <p>
-    <small>
+  <div> 
+    <span class='text_small'>
       <strong>*</strong>Please check the <a href="https://www.bsi.bund.de/DE/Themen/Unternehmen-und-Organisationen/Standards-und-Zertifizierung/IT-Grundschutz/BSI-Standards/BSI-Standard-200-3-Risikomanagement/bsi-standard-200-3-risikomanagement_node.html">BSI-Standard 200-3</a> for further information.
-    </small>
-  </p>
+    </span>
+  </div>
 
 </body>
 </html>
