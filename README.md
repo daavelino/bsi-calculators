@@ -12,6 +12,21 @@ Some refinements suggestion are:
 1. generate the entire HTML code (or most of it) via Javascript to facilitate incorporation in other projects.
 2. improve the layout (CSS) for better visualization.
 
+### Screenshots
+
+* Risk calculator:
+<p align="center">
+  <img width="100%" src=".resources/imgs/risk_interface.gif")
+</p>
+
+
+* Impact calculator:
+<p align="center">
+  <img width="100%" src=".resources/imgs/impact_interface.gif")
+</p>
+
+
+
 * Technical references:
 
 Please visit [BSI IT-Grundschutz](https://www.bsi.bund.de/EN/Topics/ITGrundschutz/itgrundschutz_node.html) for an overview of the concepts illustrated here.
