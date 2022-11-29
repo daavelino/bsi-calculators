@@ -29,4 +29,4 @@ Some refinements suggestion are:
 
 * Technical references:
 
-Please visit [BSI IT-Grundschutz](https://www.bsi.bund.de/EN/Topics/ITGrundschutz/itgrundschutz_node.html) for an overview of the concepts illustrated here.
+Please visit [BSI IT-Grundschutz](https://www.bsi.bund.de/EN/Themen/Unternehmen-und-Organisationen/Standards-und-Zertifizierung/IT-Grundschutz/it-grundschutz_node.html) for an overview of the concepts illustrated here.
