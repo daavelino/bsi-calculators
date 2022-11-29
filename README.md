@@ -1,5 +1,5 @@
 # bsi-calculators
-HTML/javascript calculators to support BSI IT-Grundschutz management activities
+HTML/javascript calculators to support BSI IT-Grundschutz risk and impact calculation.
 
 * Disclaimer:
 1. The code are PROTOTYPES only. They are completely functional but are here to present illustrations about how these concepts could be incorporated into daily activities.
