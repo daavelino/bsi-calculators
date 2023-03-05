@@ -32,7 +32,7 @@ function create_layout(settings) {
 
         let label = document.createElement("label");
         label.setAttribute("for", "fname");
-        label.innerText = tmp["label"];
+        label.innerHTML = tmp["label"];
         form.appendChild(label);
 
         // input:

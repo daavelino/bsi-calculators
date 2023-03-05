@@ -20,7 +20,7 @@ const settings = {
           "value":1
         },
         {
-          "label":"Average salary (Euro/month): ",
+          "label":"Average salary (&#8364;/month): ",
 	  "tooltip":"Average salary of the affected employees",
           "type":"number",
           "id":"average_salary",
@@ -36,8 +36,8 @@ const settings = {
           "value":20
         },
         {
-          "label":"Average operational cost (Euro/month): ",
-	  "tooltip":"The average cost to enable the employee's activities (e.g. computer, office rent, energy, etc..).",
+          "label":"Employee operational cost (&#8364;/month): ",
+	  "tooltip":"The average cost per employee to enable its activities (e.g. computer, office rent, energy, etc..).",
           "type":"number",
           "id":"operational_cost",
           "min":0,
@@ -51,7 +51,7 @@ const settings = {
       "domain_size":"h4",
       "form_input": [
         {
-          "label":"Total legal/contractual cost (Euro/month): ",
+          "label":"Legal/contractual cost (&#8364;/month): ",
           "tooltip": "The sum of all legal/contractual costs (e.g. legal fines, SLA breaking costs, etc..)",
           "type":"number",
           "id":"legal_cost",
@@ -66,7 +66,7 @@ const settings = {
       "tooltip": "Negative internal and external impact.",
       "form_input": [
         {
-          "label":"Estimated raw Brand impact (Euro): ",
+          "label":"Estimated raw Brand impact (&#8364;/month): ",
 	  "tooltip":"",
           "type":"number",
           "id":"brand_value",

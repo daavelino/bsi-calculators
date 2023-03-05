@@ -16,9 +16,9 @@ function calculate() {
 
   var result = employees_num*((1 + benefit_rate)*average_salary + operational_cost)
                + legal_cost
-               + brand_value * image_impact / 100
-               + brand_value * opportunities_impact/ 100
-               + brand_value * competitive_impact / 100;
+               + brand_value * (1 + image_impact / 100)
+               + brand_value * (1 + opportunities_impact/ 100)
+               + brand_value * (1 + competitive_impact / 100);
 
   let tmp = document.getElementById("protection_level");
   
