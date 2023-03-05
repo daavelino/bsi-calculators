@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script type="module" src="main.js"></script>
+  <script type="module">
+    import {calculate} from "./modules/calculator.mjs";
+    window.calculator = calculate;
+  </script>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <h1>BSI Impact Calculator</h1>
+  <div id="impact_pholder"></div>
+</body>
+</html>
