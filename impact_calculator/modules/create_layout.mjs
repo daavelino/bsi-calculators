@@ -21,6 +21,7 @@ function create_layout(settings) {
       // form header:
       let form_domain = document.createElement(tmp["domain_size"]);
       form_domain.innerText = tmp["domain"];
+      form_domain.setAttribute("title",tmp["tooltip"]);
       form.appendChild(form_domain);
 
       // form input elements:
@@ -36,6 +37,7 @@ function create_layout(settings) {
 
         // input:
         let input = document.createElement("input");
+        input.setAttribute("title", tmp["tooltip"]);
         input.setAttribute("type", tmp["type"]);
         input.setAttribute("id", tmp["id"]);
         input.setAttribute("min", tmp["min"]);

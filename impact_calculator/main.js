@@ -13,6 +13,7 @@ const settings = {
       "form_input": [
         {
           "label":"Number of affected employees: ",
+	  "tooltip":"Employees impaired due to the incident.",
           "type":"number",
           "id":"employees_num",
           "min":0,
@@ -20,6 +21,7 @@ const settings = {
         },
         {
           "label":"Average salary (Euro/month): ",
+	  "tooltip":"Average salary of the affected employees",
           "type":"number",
           "id":"average_salary",
           "min":0,
@@ -27,6 +29,7 @@ const settings = {
         },
         {
           "label":"Return over Investment rate (%): ",
+	  "tooltip":"Return rate over salary paid.",
           "type":"number",
           "id":"employee_roi",
           "min":0,
@@ -34,6 +37,7 @@ const settings = {
         },
         {
           "label":"Average operational cost (Euro/month): ",
+	  "tooltip":"The average cost to enable the employee's activities (e.g. computer, office rent, energy, etc..).",
           "type":"number",
           "id":"operational_cost",
           "min":0,
@@ -43,11 +47,12 @@ const settings = {
     },
     {
       "domain": "Legal/contractual domain",
+      "tooltip":"Legal or contractual fees.",
       "domain_size":"h4",
-      "tooltip": "Violation of any law, regulation or contract.",
       "form_input": [
         {
           "label":"Total legal/contractual cost (Euro/month): ",
+          "tooltip": "The sum of all legal/contractual costs (e.g. legal fines, SLA breaking costs, etc..)",
           "type":"number",
           "id":"legal_cost",
           "min":0,
@@ -62,6 +67,7 @@ const settings = {
       "form_input": [
         {
           "label":"Estimated raw Brand impact (Euro): ",
+	  "tooltip":"",
           "type":"number",
           "id":"brand_value",
           "min":0,
@@ -69,6 +75,7 @@ const settings = {
         },
         {
           "label":"Image/reputation impact (%): ",
+	  "tooltip":"",
           "type":"range",
           "id":"image_impact",
           "min":0,
@@ -76,6 +83,7 @@ const settings = {
         },
         {
           "label":"Missed opportunities impact (%): ",
+	  "tooltip":"",
           "type":"range",
           "id":"opportunities_impact",
           "min":0,
@@ -83,6 +91,7 @@ const settings = {
         },
         {
           "label":"Missing competitive advantage impact (%): ",
+	  "tooltip":"",
           "type":"range",
           "id":"competitive_impact",
           "min":0,
