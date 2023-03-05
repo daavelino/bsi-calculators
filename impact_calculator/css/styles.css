@@ -1,0 +1,17 @@
+.impact_calculator {
+  display: flex;
+  margin: 10 auto;
+  display: inline-block;
+  position: relative;
+  padding-left:1%;
+  padding-right:1%;
+  background-color: WhiteSmoke;
+}
+
+form {
+  overflow: hidden;
+}
+input {
+  float: right;
+  clear: both;
+}
