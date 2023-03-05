@@ -14,13 +14,21 @@ Some refinements suggestion are:
 
 ### Screenshots
 
-* Risk calculator:
+## Risk calculator:
 <p align="center">
   <img width="100%" src=".resources/imgs/risk_interface.gif")
 </p>
 
+  
+## Impact calculator:
 
-* Impact calculator:
+The Impact calculator helps to estimate the cost of an incident when a precise methodology is not available.
+The idea is to compute the **Cost of Something Else** (CSE), by estimating the amount of money a company spends when not doing what it is intended to to due an incident. 
+  
+In an incident, resources are mobilized to work on activities that are not part of the primary activities of the company and this is what is called here a something else. By observing how much resource is spending while doing something else (working on an incident), companies can easily estimate a cost of an incident affecting their business processes. 
+
+  
+  
 <p align="center">
   <img width="100%" src=".resources/imgs/impact_interface.gif")
 </p>
