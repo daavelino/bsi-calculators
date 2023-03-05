@@ -46,6 +46,21 @@ const settings = {
       ]
     },
     {
+      "domain": "Operational domain",
+      "tooltip":"Repairing/recovery costs.",
+      "domain_size":"h4",
+      "form_input": [
+        {
+          "label":"Repairing/recovering costs (&#8364;/year): ",
+          "tooltip": "The sum of all operational repairing or recovering costs.",
+          "type":"number",
+          "id":"recovery_cost",
+          "min":0,
+          "value":5000
+        }
+      ]
+    },
+    {
       "domain": "Legal/contractual domain",
       "tooltip":"Legal or contractual fees.",
       "domain_size":"h4",
