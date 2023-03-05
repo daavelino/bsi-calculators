@@ -20,12 +20,12 @@ const settings = {
           "value":1
         },
         {
-          "label":"Average salary (&#8364;/month): ",
-	  "tooltip":"Average salary of the affected employees",
+          "label":"Average salary cost (&#8364;/year): ",
+	  "tooltip":"Average salary cost of the affected employees.",
           "type":"number",
           "id":"average_salary",
           "min":0,
-          "value":3500
+          "value":43000
         },
         {
           "label":"Return over Investment rate (%): ",
@@ -36,12 +36,12 @@ const settings = {
           "value":20
         },
         {
-          "label":"Employee operational cost (&#8364;/month): ",
-	  "tooltip":"The average cost per employee to enable its activities (e.g. computer, office rent, energy, etc..).",
+          "label":"Employee operational cost (&#8364;/year): ",
+	  "tooltip":"The average cost per employee to enable its activities (e.g. computer, facilities, energy, etc..).",
           "type":"number",
           "id":"operational_cost",
           "min":0,
-          "value":300
+          "value":10000
         },
       ]
     },
@@ -51,12 +51,12 @@ const settings = {
       "domain_size":"h4",
       "form_input": [
         {
-          "label":"Legal/contractual cost (&#8364;/month): ",
-          "tooltip": "The sum of all legal/contractual costs (e.g. legal fines, SLA breaking costs, etc..)",
+          "label":"Legal/contractual cost (&#8364;/year): ",
+          "tooltip": "The sum of all legal/contractual costs (e.g. legal fines, SLA breaking costs, etc..).",
           "type":"number",
           "id":"legal_cost",
           "min":0,
-          "value":5000
+          "value":50000
         }
       ]
     },
@@ -66,12 +66,12 @@ const settings = {
       "tooltip": "Negative internal and external impact.",
       "form_input": [
         {
-          "label":"Estimated raw Brand impact (&#8364;/month): ",
+          "label":"Estimated raw Brand impact (&#8364;/year): ",
 	  "tooltip":"",
           "type":"number",
           "id":"brand_value",
           "min":0,
-          "value":10000
+          "value":0
         },
         {
           "label":"Image/reputation impact (%): ",
@@ -102,7 +102,7 @@ const settings = {
   ],
   "output": {
     "label": "Financial impact (estimated): ",
-    "label_size": "h3"
+    "label_size": "hr"
   }
 };
 

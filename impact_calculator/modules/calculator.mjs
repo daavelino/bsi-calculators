@@ -3,7 +3,7 @@ function calculate() {
   var protection_level = 50000; 
   var employees_num = parseInt(document.getElementById("employees_num").value);
   var average_salary = parseInt(document.getElementById("average_salary").value);
-  var benefit_rate = parseInt(document.getElementById("employee_roi").value);
+  var roi_rate = parseInt(document.getElementById("employee_roi").value);
   var operational_cost = parseInt(document.getElementById("operational_cost").value);
   var legal_cost = parseInt(document.getElementById("legal_cost").value);
   var brand_value = parseInt(document.getElementById("brand_value").value);
@@ -14,7 +14,12 @@ function calculate() {
   var impact = document.getElementById("impact_result");
   var impact_label = impact.innerText;
 
-  var result = employees_num*((1 + benefit_rate)*average_salary + operational_cost)
+
+  // multiplicative factor to compute the true cost (approximate):
+  average_salary = average_salary * 1.5;
+
+
+  var result = employees_num*((1 + roi_rate)*average_salary + operational_cost)
                + legal_cost
                + brand_value * (1 + image_impact / 100)
                + brand_value * (1 + opportunities_impact/ 100)
@@ -41,7 +46,7 @@ function calculate() {
       style: 'currency',
       currency: 'EUR'
     }).format(result_hourly);
-  impact.innerHTML = "<b>Financial impact:</b> " + result + "/month (<b>" + result_hourly + "/hour</b>)";
+  impact.innerHTML = "<b>Financial impact:</b> " + result_hourly + "/hour";
 
 }
 

@@ -57,7 +57,7 @@ function create_layout(settings) {
     output.setAttribute("id","output");
 
     let label = document.createElement(tmp["label_size"]);
-    label.innerText = tmp["label"];
+//    label.innerText = tmp["label"];
     output.append(label);
 
     let result = document.createElement("div");
