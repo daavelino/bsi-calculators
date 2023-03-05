@@ -102,7 +102,7 @@ const settings = {
   ],
   "output": {
     "label": "Financial impact (estimated): ",
-    "label_size": "hr"
+    "label2": "Schutzbedarfskategorie: "
   }
 };
 

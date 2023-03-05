@@ -51,26 +51,38 @@ function create_layout(settings) {
 
     // output:
     let linebreak = document.createElement("br"); 
-    let tmp = settings["output"];
 
-    let output = document.createElement("div");
-    output.setAttribute("id","output");
+    let output_div = document.createElement("div");
+    output_div.setAttribute("id","output");
+    main_div.appendChild(output_div);
 
-    let label = document.createElement(tmp["label_size"]);
-//    label.innerText = tmp["label"];
-    output.append(label);
+    let hline = document.createElement("hr");
+    output_div.append(hline);
 
-    let result = document.createElement("div");
-    result.setAttribute("id", "impact_result");
-    output.appendChild(result);
-    output.appendChild(linebreak);
+    let output_form = document.createElement("form");
+    output_div.appendChild(output_form);
 
-    tmp = document.createElement("div");
-    tmp.setAttribute("id", "protection_level");
-    output.appendChild(tmp);
-    output.appendChild(linebreak);
+    
+    let label = document.createElement("label");
+    label.innerHTML = settings["output"]["label"];
+    output_form.appendChild(label);
 
-    main_div.appendChild(output);
+    let output = document.createElement("output");
+    output.setAttribute("id","impact_result");
+    output_form.appendChild(output);
+
+    output_form.appendChild(linebreak);
+
+    label = document.createElement("label");
+    label.innerHTML = settings["output"]["label2"];
+    output_form.appendChild(label);
+
+    output = document.createElement("output");
+    output.setAttribute("id","protection_level");
+    output_form.appendChild(output);
+
+
+
 
     // placing html elements properly:
     let div = document.getElementById(pholder);

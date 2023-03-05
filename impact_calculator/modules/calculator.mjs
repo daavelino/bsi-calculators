@@ -1,6 +1,6 @@
 function calculate() {
 
-  var protection_level = 50000; 
+  var protection_level = 50000; // hourly
   var employees_num = parseInt(document.getElementById("employees_num").value);
   var average_salary = parseInt(document.getElementById("average_salary").value);
   var roi_rate = parseInt(document.getElementById("employee_roi").value);
@@ -12,8 +12,6 @@ function calculate() {
   var competitive_impact = parseInt(document.getElementById("competitive_impact").value);
 
   var impact = document.getElementById("impact_result");
-  var impact_label = impact.innerText;
-
 
   // multiplicative factor to compute the true cost (approximate):
   average_salary = average_salary * 1.5;
@@ -25,28 +23,26 @@ function calculate() {
                + brand_value * (1 + opportunities_impact/ 100)
                + brand_value * (1 + competitive_impact / 100);
 
-  let tmp = document.getElementById("protection_level");
-  
-  if (result < protection_level) {
-    tmp.innerHTML = "Schutzbedarfskategorie: " + "<b>Intern or Unkritisch</b>";
-  } else {
-    tmp.innerHTML = "Schutzbedarfskategorie: " + "<b>Vertraulich oder Kritisch</b>";
-  }
 
   let result_daily = result / 30;
   let result_hourly = result_daily / 24;
-  result = new Intl.NumberFormat(
-    'de-DE', {
-      style: 'currency', 
-      currency: 'EUR' 
-    }).format(result);
-    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat 
+ 
+
+  let tmp = document.getElementById("protection_level");
+  if (result_hourly < protection_level) {
+    tmp.innerHTML = "Intern or Unkritisch";
+  } else {
+    tmp.innerHTML = "Vertraulich oder Kritisch";
+  }
+
   result_hourly = new Intl.NumberFormat(
     'de-DE', {
       style: 'currency',
       currency: 'EUR'
     }).format(result_hourly);
-  impact.innerHTML = "<b>Financial impact:</b> " + result_hourly + "/hour";
+    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat 
+
+  impact.innerHTML = result_hourly + "/hour";
 
 }
 
